@@ -21,13 +21,6 @@ wheels/
 .installed.cfg
 *.egg
 
-# Logs
-*.log
-*.log.*
-
-# Local data
-tennis_bot_counters.json
-
 # IDE
 .idea/
 .vscode/
