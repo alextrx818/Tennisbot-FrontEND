@@ -266,6 +266,233 @@ For a production environment, additional optimizations could include:
 
 5. **Syntax highlighting library**: Use a dedicated library like highlight.js or prism.js for more sophisticated JSON formatting.
 
+## Complete Data Flow: From TennisBot to Frontend Display
+
+### End-to-End Data Flow Map
+
+```
+┌─────────────────────┐     ┌────────────────────┐     ┌────────────────────┐     ┌────────────────────┐
+│  External API Data  │     │                    │     │                    │     │                    │
+│  (BetsAPI, RapidAPI)│────►│ TennisBot (Python) │────►│  FastAPI Backend   │────►│   React Frontend   │
+└─────────────────────┘     │                    │     │                    │     │                    │
+                            └────────────────────┘     └────────────────────┘     └────────────────────┘
+                                      │                         │                          │
+                                      ▼                         ▼                          ▼
+                            ┌────────────────────┐     ┌────────────────────┐     ┌────────────────────┐
+                            │  Data Processing   │     │   API Endpoints    │     │  User Interface    │
+                            │  & Aggregation     │     │                    │     │                    │
+                            └────────────────────┘     └────────────────────┘     └────────────────────┘
+```
+
+### Detailed Step-by-Step Data Flow
+
+1. **External Data Acquisition**
+   ```python
+   # tennis_bot.py
+   class TennisBot:
+       async def fetch_data(self):
+           # Fetch data from BetsAPI
+           betsapi_fetcher = BetsapiPrematch()
+           betsapi_data = await betsapi_fetcher.get_data()
+           
+           # Fetch data from RapidAPI
+           rapidapi_fetcher = RapidInplayOddsFetcher()
+           rapidapi_data = await rapidapi_fetcher.get_data()
+           
+           # Process and combine data
+           processed_data = self._process_data(betsapi_data, rapidapi_data)
+           return processed_data
+   ```
+
+2. **Data Processing & Storage**
+   ```python
+   # tennis_bot.py
+   def _process_data(self, betsapi_data, rapidapi_data):
+       matches = []
+       # Process and format match data
+       for match in betsapi_data:
+           # Format and structure data
+           formatted_match = {
+               "match_id": match["id"],
+               "time": match["time"],
+               "time_status": match["time_status"],
+               "league": {
+                   "name": match["league"]["name"],
+                   "country": match["league"]["cc"]
+               },
+               "home": {
+                   "name": match["home"]["name"],
+                   "country": match.get("home_country", ""),
+                   "serving": False
+               },
+               # More processing...
+           }
+           matches.append(formatted_match)
+       
+       # Supplement with RapidAPI data
+       self._merge_rapid_data(matches, rapidapi_data)
+       
+       # Save to file for persistence
+       with open("tennis_data.json", "w") as file:
+           json.dump({"matches": matches}, file)
+           
+       return matches
+   ```
+
+3. **FastAPI Backend Integration**
+   ```python
+   # main_api.py
+   from aggregator.sports.tennis.tennis_bot import TennisBot
+
+   # Global variable to store tennis matches
+   tennis_matches = []
+
+   # Function called on startup and periodically
+   async def fetch_tennis_data():
+       global tennis_matches
+       try:
+           tennis_bot = TennisBot()
+           matches = await tennis_bot.fetch_data()
+           tennis_matches = matches
+       except Exception as e:
+           logger.error(f"Error fetching tennis data: {str(e)}")
+   ```
+
+4. **API Endpoint Exposure**
+   ```python
+   # main_api.py
+   @app.get("/api/tennis")
+   async def get_tennis_data():
+       try:
+           # Return processed tennis data
+           return {"matches": tennis_matches}
+       except Exception as e:
+           logger.error(f"Error retrieving tennis data: {str(e)}")
+           return {"error": str(e)}
+
+   @app.get("/api/tennis/match/{match_id}")
+   async def get_match_details(match_id: str):
+       try:
+           # Find the specific match
+           for match in tennis_matches:
+               if match.get("match_id") == match_id:
+                   return match
+           
+           # If match not found
+           return {"error": "Match not found"}, 404
+       except Exception as e:
+           logger.error(f"Error retrieving match details: {str(e)}")
+           return {"error": str(e)}
+   ```
+
+5. **Frontend API Communication**
+   ```jsx
+   // TennisData.jsx
+   const fetchData = async () => {
+     try {
+       setLoading(true);
+       // Request to FastAPI endpoint
+       const response = await fetch('/api/tennis');
+       
+       if (!response.ok) {
+         throw new Error(`HTTP error! Status: ${response.status}`);
+       }
+       
+       // Parse JSON response
+       const jsonData = await response.json();
+       setData(jsonData);
+       setLoading(false);
+     } catch (err) {
+       console.error('Error fetching data:', err);
+       setError(err.message);
+       setLoading(false);
+     }
+   };
+   
+   // MatchDetail.jsx
+   const fetchMatchDetails = async () => {
+     try {
+       setLoading(true);
+       // Request to match-specific endpoint
+       const response = await fetch(`/api/tennis/match/${matchId}`);
+       
+       if (!response.ok) {
+         throw new Error(`HTTP error! Status: ${response.status}`);
+       }
+       
+       // Parse detailed match data
+       const data = await response.json();
+       setMatchData(data);
+       setLoading(false);
+     } catch (err) {
+       console.error('Error fetching match details:', err);
+       setError(err.message);
+       setLoading(false);
+     }
+   };
+   ```
+
+6. **Data Rendering in UI**
+   ```jsx
+   // TennisData.jsx - List View Rendering
+   return (
+     <div className="tennis-data-container">
+       {loading && <div className="loading">Loading match data...</div>}
+       {error && <div className="error">Error: {error}</div>}
+       {data && (
+         <div className="matches-list">
+           {data.matches.map(renderMatchCard)}
+         </div>
+       )}
+     </div>
+   );
+   
+   // MatchDetail.jsx - Detailed View Rendering
+   return (
+     <div className="match-detail-container">
+       {/* Structured data display */}
+       <div className="match-info">...</div>
+       <div className="teams-section">...</div>
+       
+       {/* Complete JSON data display */}
+       <div className="detail-section raw-data">
+         <h2>Complete Match Data</h2>
+         <pre className="json-data">
+           {JSON.stringify(matchData, null, 2)}
+         </pre>
+       </div>
+     </div>
+   );
+   ```
+
+### Data Transformation Summary
+
+1. **External APIs → TennisBot**
+   - Data is fetched from multiple external sources
+   - Raw data is in different formats and structures
+
+2. **TennisBot → Processed Data**
+   - Data is normalized into a consistent format
+   - Multiple sources are merged and enriched
+   - Data is cleaned and validated
+
+3. **Processed Data → FastAPI**
+   - Formatted data is made available to API endpoints
+   - Data is stored in memory for quick access
+   - Backup copy saved to JSON file for persistence
+
+4. **FastAPI → React Frontend**
+   - API provides both list view (all matches) and detail view (single match)
+   - HTTP responses with JSON content type
+   - Error handling at each step
+
+5. **React Frontend → User Display**
+   - Data is received and stored in component state
+   - List view shows summarized data for browsing
+   - Detail view shows complete JSON data when requested
+
+This multi-stage pipeline ensures that the raw external data is properly processed, enriched, and transformed before being displayed to the end user, with appropriate error handling and performance optimizations at each step.
+
 ## Conclusion
 
 By implementing this two-tier approach to data display with optimized rendering techniques, we successfully managed to handle and display large JSON datasets in a user-friendly manner. This architecture balances performance with user experience, enabling users to browse large amounts of match data efficiently while still having access to all the detailed information when needed.
