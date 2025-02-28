@@ -169,3 +169,138 @@
 2025-02-28 16:36:23,917 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 12 in-play tennis events.
 2025-02-28 16:36:24,518 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 12 events.
 2025-02-28 16:37:25,672 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 12 in-play tennis events.
+2025-02-28 16:37:26,221 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 12 events.
+2025-02-28 16:38:27,404 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 13 in-play tennis events.
+2025-02-28 16:38:27,815 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 13 events.
+2025-02-28 16:39:29,073 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 13 in-play tennis events.
+2025-02-28 16:39:29,694 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 13 events.
+2025-02-28 16:40:37,275 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 13 in-play tennis events.
+2025-02-28 16:40:38,647 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 13 events.
+2025-02-28 16:41:39,792 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 14 in-play tennis events.
+2025-02-28 16:41:45,295 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 14 events.
+2025-02-28 16:42:46,879 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 14 in-play tennis events.
+2025-02-28 16:42:47,715 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 14 events.
+2025-02-28 16:43:50,222 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 14 in-play tennis events.
+2025-02-28 16:43:51,610 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 14 events.
+2025-02-28 16:44:53,159 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 12 in-play tennis events.
+2025-02-28 16:44:57,234 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 12 events.
+2025-02-28 16:45:58,536 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 13 in-play tennis events.
+2025-02-28 16:46:02,515 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 13 events.
+2025-02-28 16:47:07,643 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 13 in-play tennis events.
+2025-02-28 16:47:08,064 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 13 events.
+2025-02-28 16:48:13,852 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 13 in-play tennis events.
+2025-02-28 16:48:16,553 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 13 events.
+2025-02-28 16:49:17,824 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 12 in-play tennis events.
+2025-02-28 16:49:19,146 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 12 events.
+2025-02-28 16:50:20,350 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 12 in-play tennis events.
+2025-02-28 16:50:25,348 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 12 events.
+2025-02-28 16:51:26,632 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 12 in-play tennis events.
+2025-02-28 16:51:31,288 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 12 events.
+2025-02-28 16:52:32,774 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 12 in-play tennis events.
+2025-02-28 16:52:34,198 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 12 events.
+2025-02-28 16:53:35,496 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 12 in-play tennis events.
+2025-02-28 16:53:36,301 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 12 events.
+2025-02-28 16:54:37,573 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 13 in-play tennis events.
+2025-02-28 16:54:38,183 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 13 events.
+2025-02-28 16:55:39,311 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 13 in-play tennis events.
+2025-02-28 16:55:43,969 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 13 events.
+2025-02-28 16:56:45,117 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 13 in-play tennis events.
+2025-02-28 16:56:46,180 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 13 events.
+2025-02-28 16:57:49,929 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 13 in-play tennis events.
+2025-02-28 16:57:51,071 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 13 events.
+2025-02-28 16:58:52,206 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 13 in-play tennis events.
+2025-02-28 16:58:52,888 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 13 events.
+2025-02-28 16:59:54,060 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 14 in-play tennis events.
+2025-02-28 16:59:54,730 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 14 events.
+2025-02-28 17:00:55,996 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 14 in-play tennis events.
+2025-02-28 17:01:00,104 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 14 events.
+2025-02-28 17:02:01,610 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 14 in-play tennis events.
+2025-02-28 17:02:03,105 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 14 events.
+2025-02-28 17:03:04,537 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 14 in-play tennis events.
+2025-02-28 17:03:05,812 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 14 events.
+2025-02-28 17:04:11,763 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 14 in-play tennis events.
+2025-02-28 17:04:16,282 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 14 events.
+2025-02-28 17:05:17,614 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 14 in-play tennis events.
+2025-02-28 17:05:25,040 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 14 events.
+2025-02-28 17:06:26,274 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 14 in-play tennis events.
+2025-02-28 17:06:28,712 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 14 events.
+2025-02-28 17:07:29,897 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 14 in-play tennis events.
+2025-02-28 17:07:34,815 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 14 events.
+2025-02-28 17:08:36,524 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 14 in-play tennis events.
+2025-02-28 17:08:39,510 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 14 events.
+2025-02-28 17:09:43,393 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 14 in-play tennis events.
+2025-02-28 17:09:44,532 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 14 events.
+2025-02-28 17:10:46,124 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 14 in-play tennis events.
+2025-02-28 17:10:51,521 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 14 events.
+2025-02-28 17:11:52,869 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 14 in-play tennis events.
+2025-02-28 17:11:56,794 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 14 events.
+2025-02-28 17:12:58,203 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 13 in-play tennis events.
+2025-02-28 17:13:03,706 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 13 events.
+2025-02-28 17:14:04,854 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 13 in-play tennis events.
+2025-02-28 17:14:07,032 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 13 events.
+2025-02-28 17:15:08,232 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 12 in-play tennis events.
+2025-02-28 17:15:08,918 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 12 events.
+2025-02-28 17:16:09,881 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 10 in-play tennis events.
+2025-02-28 17:16:12,519 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 10 events.
+2025-02-28 17:17:13,493 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 10 in-play tennis events.
+2025-02-28 17:17:14,149 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 10 events.
+2025-02-28 17:18:19,345 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 10 in-play tennis events.
+2025-02-28 17:18:20,750 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 10 events.
+2025-02-28 17:19:21,945 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 10 in-play tennis events.
+2025-02-28 17:19:22,148 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 10 events.
+2025-02-28 17:20:26,740 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 10 in-play tennis events.
+2025-02-28 17:20:28,908 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 10 events.
+2025-02-28 17:21:30,316 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 9 in-play tennis events.
+2025-02-28 17:21:30,697 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 9 events.
+2025-02-28 17:22:32,292 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 9 in-play tennis events.
+2025-02-28 17:22:32,649 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 9 events.
+2025-02-28 17:23:33,593 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 9 in-play tennis events.
+2025-02-28 17:23:35,919 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 9 events.
+2025-02-28 17:24:36,928 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 9 in-play tennis events.
+2025-02-28 17:24:37,531 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 9 events.
+2025-02-28 17:25:39,195 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 9 in-play tennis events.
+2025-02-28 17:25:41,159 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 9 events.
+2025-02-28 17:26:43,067 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 8 in-play tennis events.
+2025-02-28 17:26:44,404 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 8 events.
+2025-02-28 17:27:46,015 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 8 in-play tennis events.
+2025-02-28 17:27:47,113 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 8 events.
+2025-02-28 17:28:48,155 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 8 in-play tennis events.
+2025-02-28 17:28:48,386 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 8 events.
+2025-02-28 17:29:49,411 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 8 in-play tennis events.
+2025-02-28 17:29:50,467 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 8 events.
+2025-02-28 17:30:51,498 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 9 in-play tennis events.
+2025-02-28 17:30:52,265 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 9 events.
+2025-02-28 17:31:53,347 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 9 in-play tennis events.
+2025-02-28 17:31:57,784 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 9 events.
+2025-02-28 17:32:58,860 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 9 in-play tennis events.
+2025-02-28 17:33:03,390 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 9 events.
+2025-02-28 17:34:05,063 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 10 in-play tennis events.
+2025-02-28 17:34:09,359 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 10 events.
+2025-02-28 17:35:12,421 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 10 in-play tennis events.
+2025-02-28 17:35:17,394 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 10 events.
+2025-02-28 17:36:18,581 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 10 in-play tennis events.
+2025-02-28 17:36:22,961 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 10 events.
+2025-02-28 17:37:24,255 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 10 in-play tennis events.
+2025-02-28 17:37:24,542 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 10 events.
+2025-02-28 17:38:26,014 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 10 in-play tennis events.
+2025-02-28 17:38:29,401 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 10 events.
+2025-02-28 17:39:30,553 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 10 in-play tennis events.
+2025-02-28 17:39:31,031 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 10 events.
+2025-02-28 17:40:32,039 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 10 in-play tennis events.
+2025-02-28 17:40:32,875 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 10 events.
+2025-02-28 17:41:34,094 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 10 in-play tennis events.
+2025-02-28 17:41:37,118 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 10 events.
+2025-02-28 17:42:38,338 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 10 in-play tennis events.
+2025-02-28 17:42:42,700 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 10 events.
+2025-02-28 17:43:43,948 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 10 in-play tennis events.
+2025-02-28 17:43:44,603 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 10 events.
+2025-02-28 17:44:45,944 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 10 in-play tennis events.
+2025-02-28 17:44:50,748 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 10 events.
+2025-02-28 17:45:54,754 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 10 in-play tennis events.
+2025-02-28 17:45:57,748 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 10 events.
+2025-02-28 17:46:58,651 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 10 in-play tennis events.
+2025-02-28 17:47:01,263 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 10 events.
+2025-02-28 17:48:02,239 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 10 in-play tennis events.
+2025-02-28 17:48:06,671 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 10 events.
+2025-02-28 17:49:07,726 - aggregator.sports.tennis.betsapi_prematch - INFO - Found 10 in-play tennis events.
+2025-02-28 17:49:08,030 - aggregator.sports.tennis.betsapi_prematch - INFO - Successfully fetched prematch data for 10 events.
