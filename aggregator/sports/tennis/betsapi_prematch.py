@@ -34,7 +34,7 @@ logger.addHandler(file_handler)
 # -----------------------------------------------------------------------------
 # Hardcoded BetsAPI Credentials / Settings
 # -----------------------------------------------------------------------------
-API_TOKEN = "213380-3ngqZ80Cx59eaU"    # BetsAPI token
+API_TOKEN = "215152-OYDi6ziW1Szobx"    # BetsAPI token
 BASE_URL = "https://api.b365api.com/v3"  # BetsAPI v3 base URL
 SPORT_ID = "13"  # 13 = Tennis
 

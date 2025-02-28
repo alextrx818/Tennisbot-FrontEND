@@ -7,6 +7,10 @@ import json
 from typing import Optional, Dict
 from datetime import datetime, timedelta
 import pytz
+import threading
+from fastapi import FastAPI, WebSocket
+from fastapi.middleware.cors import CORSMiddleware
+import uvicorn
 
 # Using absolute imports
 from aggregator.sports.tennis.betsapi_prematch import BetsapiPrematch
@@ -20,6 +24,12 @@ DEFAULT_CONCURRENCY = int(os.getenv("TENNIS_BOT_CONCURRENCY", "5"))
 DEFAULT_MAX_RETRIES = int(os.getenv("TENNIS_BOT_MAX_RETRIES", "3"))
 DEFAULT_FETCH_INTERVAL = float(os.getenv("TENNIS_BOT_FETCH_INTERVAL", "60"))
 COUNTER_FILE = "tennis_bot_counters.json"
+
+###############################################################################
+# Global Variables
+###############################################################################
+# Store the latest merged data globally to share between TennisBot and FastAPI
+latest_tennis_data = []
 
 ###############################################################################
 # Logging Configuration
@@ -258,6 +268,10 @@ class TennisBot:
                             bet365_id = match['betsapi_data'].get('bet365_id', '')
                             logger.info(f"  {home} vs {away} (Bet365Id: {bet365_id})")
 
+                # Update with the latest merged data
+                global latest_tennis_data
+                latest_tennis_data = merged_data
+
                 message = {
                     "type": "match_data",
                     "matches": merged_data
@@ -280,6 +294,190 @@ class TennisBot:
             self.save_counters()
         finally:
             logger.info("TennisBot run loop has exited.")
+
+    async def run_single_cycle(self) -> None:
+        """
+        Runs a single data fetch cycle and returns the merged results.
+        """
+        start_time = time.time()
+        logger.info(f"Starting fetch cycle at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+        
+        # Reset cycle counters
+        self.reset_cycle_counters()
+        
+        # Reset date counters if day/hour changed
+        est = pytz.timezone('America/New_York')
+        now = datetime.now(est)
+        if now.date() != self.last_reset_date:
+            self.reset_daily_counters()
+            self.last_reset_date = now.date()
+            
+            # If month also changed, reset monthly counters
+            if now.month != self.last_reset_month:
+                self.reset_monthly_counters()
+                self.last_reset_month = now.month
+                
+        # If hour changed, reset hourly counters
+        if now.hour != self.last_reset_hour:
+            self.reset_hourly_counters()
+            self.last_reset_hour = now.hour
+            
+        # Step 1: Fetch data from BetsAPI
+        logger.info("Fetching prematch data from BetsAPI...")
+        bets_data = []
+        try:
+            bets_data = await self.betsapi_fetcher.get_tennis_data()
+            self.current_cycle_calls['betsapi'] = len(bets_data)
+            self.hourly_total_calls['betsapi'] += len(bets_data)
+            self.daily_total_calls['betsapi'] += len(bets_data)
+            self.monthly_total_calls['betsapi'] += len(bets_data)
+        except Exception as e:
+            logger.error(f"Error fetching from BetsAPI: {e}")
+            
+        # Step 2: Fetch data from RapidAPI
+        logger.info("Fetching in-play odds from RapidAPI...")
+        rapid_data = []
+        try:
+            rapid_data = await self.rapid_fetcher.get_tennis_data()
+            self.current_cycle_calls['rapidapi'] = len(rapid_data)
+            self.hourly_total_calls['rapidapi'] += len(rapid_data)
+            self.daily_total_calls['rapidapi'] += len(rapid_data)
+            self.monthly_total_calls['rapidapi'] += len(rapid_data)
+        except Exception as e:
+            logger.error(f"Error fetching from RapidAPI: {e}")
+            
+        # Step 3: Merge the data
+        logger.info("Merging data from both APIs...")
+        merged_data = []
+        if bets_data and rapid_data:
+            try:
+                merger = TennisMerger()
+                merged_data = merger.merge(bets_data, rapid_data)
+                
+                if merged_data and len(merged_data) > 0:
+                    sample = merged_data[0]
+                    logger.info("Sample match data:")
+                    if 'betsapi_data' in sample:
+                        logger.info(json.dumps(sample['betsapi_data'], indent=2))
+                    if 'rapid_data' in sample:
+                        logger.info(json.dumps(sample['rapid_data'], indent=2))
+                    
+                # Print statistics
+                rapid_only = 0
+                bets_only = 0
+                for match in merged_data:
+                    if not match.get('betsapi_data'):
+                        rapid_only += 1
+                    if not match.get('rapid_data'):
+                        bets_only += 1
+                        
+                # Also count matches from each source
+                for match in merged_data:
+                    match_id = match.get('match_id', 'unknown')
+                    
+                # Log a message with counts
+                logger.info(f"Merger results: {len(merged_data)} total matches " +
+                           f"({len(bets_data)} from BetsAPI, {len(rapid_data)} from RapidAPI)")
+                
+                # Store data globally to make available to FastAPI
+                global latest_tennis_data
+                latest_tennis_data = merged_data
+                
+                # Create response message
+                message = {
+                    "type": "match_data",
+                    "matches": merged_data
+                }
+                message_json = json.dumps(message)
+                logger.info(f"Final merged data (first 100 chars): {message_json[:100]}")
+                
+            except Exception as e:
+                logger.error(f"Error in data merging: {e}")
+                
+        # Save updated counters
+        self.save_counters()
+        
+        # Log counter information
+        logger.info("API Usage Counters:")
+        logger.info("  Current Cycle:")
+        logger.info(f"    BetsAPI calls: {self.current_cycle_calls['betsapi']}")
+        logger.info(f"    RapidAPI calls: {self.current_cycle_calls['rapidapi']}")
+        logger.info("  Hourly Totals (EST):")
+        logger.info(f"    BetsAPI calls: {self.hourly_total_calls['betsapi']}")
+        logger.info(f"    RapidAPI calls: {self.hourly_total_calls['rapidapi']}")
+        logger.info("  Daily Totals (EST):")
+        logger.info(f"    BetsAPI calls: {self.daily_total_calls['betsapi']}")
+        logger.info(f"    RapidAPI calls: {self.daily_total_calls['rapidapi']}")
+        logger.info("  Monthly Totals (EST):")
+        logger.info(f"    BetsAPI calls: {self.monthly_total_calls['betsapi']}")
+        logger.info(f"    RapidAPI calls: {self.monthly_total_calls['rapidapi']}")
+        logger.info("Match Results:")
+        logger.info(f"  Total RapidAPI records: {len(rapid_data)}")
+        logger.info(f"  Total BetsAPI records: {len(bets_data)}")
+        logger.info(f"  Total unique matches: {len(merged_data)}")
+        logger.info(f"  Successfully paired matches: {len(merged_data) - rapid_only - bets_only}")
+        logger.info(f"  RapidAPI-only matches: {rapid_only}")
+        logger.info(f"  BetsAPI-only matches: {bets_only}")
+        
+        # Track the time for this fetch cycle
+        self.last_fetch_time = time.time()
+        cycle_time = self.last_fetch_time - start_time
+        sleep_time = max(0, self.fetch_interval - cycle_time)
+        logger.info(f"Fetch cycle complete. Sleeping for {sleep_time:.2f} seconds.")
+        
+        # Return the merged data
+        return merged_data
+
+###############################################################################
+# FastAPI app for serving data directly to frontend
+###############################################################################
+app = FastAPI()
+
+# Add CORS to allow requests from your frontend
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # For development only, restrict this in production
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# WebSocket endpoint
+@app.websocket("/ws")
+async def websocket_endpoint(websocket: WebSocket):
+    await websocket.accept()
+    try:
+        while True:
+            # Send the latest data every time it's updated
+            global latest_tennis_data
+            if latest_tennis_data:
+                await websocket.send_json({
+                    "timestamp": datetime.now().isoformat(),
+                    "matches": latest_tennis_data
+                })
+            # Wait for a moment to prevent overwhelming the client
+            await asyncio.sleep(1)
+    except Exception as e:
+        logger.error(f"WebSocket error: {e}")
+    finally:
+        await websocket.close()
+
+# REST endpoint alternative
+@app.get("/api/tennis")
+async def get_tennis_data():
+    global latest_tennis_data
+    return {
+        "timestamp": datetime.now().isoformat(),
+        "matches": latest_tennis_data
+    }
+
+# Function to start the API server
+def start_api_server():
+    try:
+        logger.info("Starting API server on port 8000")
+        uvicorn.run(app, host="0.0.0.0", port=8000)
+    except Exception as e:
+        logger.error(f"Error starting API server: {e}")
 
 ###############################################################################
 # Main Entry Point
@@ -306,6 +504,9 @@ async def main() -> None:
     for sig in (signal.SIGINT, signal.SIGTERM):
         loop.add_signal_handler(sig, lambda: shutdown_handler(loop))
     bot = TennisBot()
+    api_thread = threading.Thread(target=start_api_server)
+    api_thread.daemon = True  # Allow the thread to exit when main thread exits
+    api_thread.start()
     await bot.run()
 
 if __name__ == "__main__":
